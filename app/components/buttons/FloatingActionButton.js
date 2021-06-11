@@ -5,7 +5,7 @@ import { StyleSheet,TouchableOpacity } from 'react-native'
 
 const FAB = ({ onPress })=>(
     <TouchableOpacity style={styles.floatingButton} onPress={()=> onPress() } >
-        <Icon name="add"  size={24} color={colors.White} />
+        <Icon name="add"  size={24} color={colors.white} />
     </TouchableOpacity>
 )
 
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     floatingButton:{
         width: 57.5,
         height: 57.5,
-        backgroundColor: colors.Accent,
+        backgroundColor: colors.accent,
         justifyContent: 'center',
         alignItems: "center",
         borderRadius:100,

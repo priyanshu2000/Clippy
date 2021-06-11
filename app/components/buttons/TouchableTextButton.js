@@ -5,7 +5,7 @@ import { TouchableOpacity, Text, StyleSheet, Keyboard } from 'react-native'
 const TextButton = ({ title, color, onPress }) => {
     return (
         <TouchableOpacity style={styles.bottomSheetOptionContainer} onPress={()=>{onPress();Keyboard.dismiss()}} >
-            <Text style={[styles.bottomSheetOptionText,{color:color || colors.Black}]} >{title}</Text>
+            <Text style={[styles.bottomSheetOptionText,{color:color || colors.grey}]} >{title}</Text>
         </TouchableOpacity>
     )
 }

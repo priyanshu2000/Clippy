@@ -9,7 +9,7 @@ const Divider = () => {
 const styles = StyleSheet.create({
     divider:{
         borderWidth:0.5,
-        borderColor:colors.Black,
+        borderColor:colors.black,
         opacity:0.2
       }
 })

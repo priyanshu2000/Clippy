@@ -23,7 +23,7 @@ const AppInput = ({ placeHolder, onChange, value, autoFocus, heading, isEditable
         <View style={styles.inputContainer} >
             <TextInput
                 keyboardType={'default'}
-                placeholderTextColor={colors.Grey}
+                placeholderTextColor={colors.grey}
                 placeholder={placeHolder}
                 style={styles.input}
                 onChangeText={onChange}
@@ -33,7 +33,7 @@ const AppInput = ({ placeHolder, onChange, value, autoFocus, heading, isEditable
                 editable={isEditable}
                 onChange={(e)=>handleInput(e.nativeEvent.text)}
                 />
-            {showHint ? <>{ showError ?  <Icon name='alert-circle-outline' color='red' size={20} /> : <Icon name='checkmark-circle-outline' color='green' size={20} />}</> : null}
+            {showHint && <>{ showError ?  <Icon name='alert-circle-outline' color='red' size={20} /> : <Icon name='checkmark-circle-outline' color='green' size={20} />}</>}
         </View>
         </View>
     )
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         backgroundColor:colors.lightGrey,
         margin:3.5,
         fontFamily:'MediumItalic',
-        color:colors.Black,
+        color:colors.black,
         opacity:0.7,
         alignItems:"center",
         height:40
@@ -68,10 +68,9 @@ const styles = StyleSheet.create({
     input:{
         width:'95%',
         fontFamily:'MediumItalic',
-        color:colors.Black,
+        color:colors.black,
         opacity:0.7
     }
-    //error: {  fontSize: 12, margin: 3.5, color:'red' }
 })
 
 export default AppInput;

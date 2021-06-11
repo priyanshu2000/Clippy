@@ -11,12 +11,12 @@ const NetWorkStatus = () => {
         NetInfo.addEventListener(state => setIsOnline(state.isConnected));
     }, [])
 
-    return isOnline ? null : <View style={styles.container}><Text style={styles.text}>No Internet connection!</Text></View>
+    return !isOnline && <View style={styles.container}><Text style={styles.text}>No Internet connection!</Text></View>
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.Red,
+        backgroundColor: colors.red,
         position: 'absolute',
         bottom: 0,
         left: 0,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         zIndex: 9
     },
-    text: { color: colors.White, fontSize: 12, fontFamily:'MediumItalic' }
+    text: { color: colors.white, fontSize: 12, fontFamily:'MediumItalic' }
 })
 
 export default NetWorkStatus;

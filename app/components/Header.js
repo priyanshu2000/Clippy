@@ -10,10 +10,10 @@ const Header = ({ isShowIcons , right , isShowBack  }) => {
 
     if(isShowIcons) return (
                     <>
-                        <StatusBar backgroundColor={colors.Primary} />
+                        <StatusBar backgroundColor={colors.primary} />
                             <View style={styles.headerContainer} >
                                 { isShowBack && <TouchableOpacity onPress={() => goBack()} style={styles.backIcon} >
-                                                <Icon name='chevron-back-outline' size={20} color={colors.White}  />
+                                                <Icon name='chevron-back-outline' size={20} color={colors.white}  />
                                                 </TouchableOpacity>}
                                 <View style={styles.headerTextContainer} >
                                     <Text style={styles.headerText}>Clippy</Text>
@@ -25,7 +25,7 @@ const Header = ({ isShowIcons , right , isShowBack  }) => {
 
     else return (
         <>
-            <StatusBar backgroundColor={colors.Primary} />
+            <StatusBar backgroundColor={colors.primary} />
             <View style={styles.headerContainer} >
                 <View style={styles.headerTextContainer} >
                     <Text style={styles.headerText} >Clippy</Text>
@@ -40,15 +40,15 @@ const styles = StyleSheet.create({
     headerContainer:{
         width:'100%',
         justifyContent:'center',
-        backgroundColor:colors.Primary,
+        backgroundColor:colors.primary,
         position:'relative',
-        shadowColor: colors.Black,
+        shadowColor: colors.black,
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.4,
         shadowRadius: 1,
         elevation: 2,
         paddingVertical: 15,
-        zIndex:10
+        zIndex:10,
     },
     backIcon:{
         position: 'absolute',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     headerText:{
         fontFamily:'MediumItalic',
         fontSize: 20,
-        color:colors.White,
+        color:colors.white,
     },
 })
 

@@ -12,7 +12,7 @@ const Loader = ({isShow}) => {
             >
             <View style={styles.modalBackground}>
                 <View style={styles.activityIndicatorWrapper}>
-                    <ActivityIndicator size='small' color={colors.Black}/>
+                    <ActivityIndicator size='small' color={colors.black}/>
                 </View>
             </View>
         </Modal>
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        backgroundColor: '#00000040'
+        backgroundColor: colors.blackFade
     },
     activityIndicatorWrapper: {
-        backgroundColor: colors.White,
+        backgroundColor: colors.white,
         height: 60,
         width: 60,
         borderRadius: 10,

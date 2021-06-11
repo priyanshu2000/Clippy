@@ -23,13 +23,15 @@ const BottomSheet = forwardRef((props, ref) => {
     }));
 
     return (
-        <RBSheet height={height}
+        <RBSheet
+            height={height}
             ref={refRBSheet}
             closeOnDragDown={true}
             closeOnPressMask={true}
             dragFromTopOnly={true}
             customStyles={containerStyle}>
-            {children} </RBSheet>
+            {children}
+        </RBSheet>
     );
 })
 

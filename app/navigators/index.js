@@ -1,8 +1,8 @@
 import React from 'react'
-import Home from '../screens/home'
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import ViewCollection from '../screens/view-collection';
+import Home from '../screens/Home'
+import ViewCollection from '../screens/ViewCollection';
 import {  CollectionProvider } from '../utils/context'
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 

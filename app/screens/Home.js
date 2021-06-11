@@ -1,21 +1,22 @@
 import React,{ useState, useEffect, useRef, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import Header from '../components/header';
-import FAB from '../components/buttons/floating-action-button';
-import Dialogue from '../components/dialogue';
-import BottomSheet from '../components/bottom-sheet';
-import Colors from '../constants/colors';
-import AppInput from '../components/app-input';
-import ActionButton from '../components/buttons/action-button';
-import DDPicker from '../components/drop-down-picker';
+import Header from '../components/Header';
+import FAB from '../components/buttons/FloatingActionButton';
+import BottomSheet from '../components/BottomSheet';
+import colors from '../constants/colors';
+import AppInput from '../components/AppInput';
+import ActionButton from '../components/buttons/ActionButton';
+import DDPicker from '../components/DropDownPicker';
+import Divider from '../components/Divider';
+import TextButton from '../components/buttons/TouchableTextButton';
+import ListEmptyComponent from '../components/ListEmptyComponent';
+import Loader from '../components/Loader';
+import ToastMessage from '../components/ToastMessage';
+import Dialogue from '../components/dialogues/Dialogue';
+import { urlInfoParser, UUID } from '../utils';
+import { CollectionContext } from '../utils/context';
 import { createCollection, getCollections, createArticle } from '../api';
-import Divider from '../components/divider';
-import TextButton from '../components/buttons/touchable-text-button';
-import { urlInfoParser, UUID } from '../utils'
-import { CollectionContext } from '../utils/context'
-import ListEmptyComponent from '../components/list-empty-component'
-import Loader from '../components/loader';
-import ToastMessage from '../components/toast-message';
+
 
 const Home = ({ navigation }) => {
 
@@ -41,7 +42,7 @@ const Home = ({ navigation }) => {
     const onCreateCollection = async ()=> {
         if(collectionName){
             const data = { collection_id:UUID(), collection_name:collectionName, data: [] }
-            const response = await  createCollection(data)
+            const response = await createCollection(data)
             setCollections(response);setCollectionName()
             setShowCollectionDialogue(false)
         } else {
@@ -55,7 +56,7 @@ const Home = ({ navigation }) => {
             const urlInfo = await urlInfoParser(articleUrl)
             const data = { collection_id:selectedCollection, article_id:UUID(), article_title:urlInfo.title, article_url:urlInfo.url, favicon_url:urlInfo.favicons[0], read:false }
             const response = await createArticle(data)
-            setCollections(response);setShowArticleDialogue(false);setLoading(false)
+            setCollections(response);setShowArticleDialogue(false);setLoading(false);setArticleUrl()
         } catch (e) {
             ToastMessage('error', 'Invalid', 'Entered URL is invalid')
             setLoading(false)
@@ -63,29 +64,29 @@ const Home = ({ navigation }) => {
     }
 
     const CollectionDialogue =()=>(
-            <Dialogue heading='Create a Collection' >
+            <Dialogue isOpen={isShowCollectionDialogue} heading='Create a Collection' >
                 <AppInput onChange={setCollectionName} heading='Collection name' />
                 <View style={styles.actionButtonContainer} >
                     <ActionButton title='Cancel' onPress={()=>setShowCollectionDialogue(false)} />
-                    <ActionButton title='Create' color={Colors.Accent} titleColor={Colors.White} onPress={()=>{onCreateCollection()}} />
+                    <ActionButton title='Create' color={colors.accent} titleColor={colors.white} onPress={()=>{onCreateCollection()}} />
                 </View>
             </Dialogue>
         )
 
     const ArticleDialogue =()=>(
-            <Dialogue heading='Create a Clip' >
+            <Dialogue isOpen={isShowArticleDialogue} heading='Create a Clip' >
                 <DDPicker  heading='Collection' placeHolder="Select a collection" value={selectedCollection} setValue={setSelectedCollection} items={collections} />
                 <AppInput heading='URL' onChange={setArticleUrl} />
                 <View style={styles.actionButtonContainer} >
                     <ActionButton title='Cancel' onPress={()=>setShowArticleDialogue(false)} />
-                    <ActionButton title='Create' color={Colors.Accent} titleColor={Colors.White} onPress={()=>onCreateArticle()} />
+                    <ActionButton title='Create' color={colors.accent} titleColor={colors.white} onPress={()=>onCreateArticle()} />
                 </View>
             </Dialogue>
         )
 
     const OptionBottomSheet =()=>(
             <BottomSheet ref={sheetRef} height={125} >
-                <TextButton title='Creat a Clip' color={Colors.Accent} onPress={()=>setShowArticleDialogue(true)} />
+                <TextButton title='Creat a Clip' color={colors.accent} onPress={()=>setShowArticleDialogue(true)} />
                 <TextButton title='Create a Collection' onPress={()=>setShowCollectionDialogue(true)} />
             </BottomSheet>
         )
@@ -117,8 +118,7 @@ const Home = ({ navigation }) => {
                         </View>
                 )}
             />
-            { isShowCollectionDialogue ? CollectionDialogue() : null  }
-            { isShowArticleDialogue ? ArticleDialogue() : null  }
+            { CollectionDialogue() }{ ArticleDialogue() }
         </View>
     )
 }
@@ -126,7 +126,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:Colors.White
+        backgroundColor:colors.white
     },
     bottomSheetOptionContainer:{
         width:'100%',

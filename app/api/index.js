@@ -1,4 +1,4 @@
-import ToastMessage from '../components/toast-message'
+import ToastMessage from '../components/ToastMessage'
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const getCollections = async () => {
@@ -10,7 +10,7 @@ export const getCollections = async () => {
     }
 }
 
-export const createCollection = async (data) => {
+export const createCollection = async ( data ) => {
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -27,7 +27,8 @@ export const createCollection = async (data) => {
     }ToastMessage('error', 'Something went wrong', 'Please try again.')
 }
 
-export const editCollection = async ({collection_id, collection_name}) => {
+export const editCollection = async ( data ) => {
+    const { collection_id, collection_name } = data;
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -44,7 +45,8 @@ export const editCollection = async ({collection_id, collection_name}) => {
     }
 }
 
-export const deleteCollection = async ({collection_id}) => {
+export const deleteCollection = async ( data ) => {
+    const { collection_id } = data
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -58,7 +60,7 @@ export const deleteCollection = async ({collection_id}) => {
     }
 }
 
-export const getArticles = async (collection_id) => {
+export const getArticles = async ( collection_id ) => {
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -82,7 +84,8 @@ export const getArticles = async (collection_id) => {
     }
 }
 
-export const createArticle = async ({collection_id,article_id,article_title,article_url,favicon_url,read}) => {
+export const createArticle = async ( data ) => {
+    const { collection_id,article_id,article_title,article_url,favicon_url,read } = data;
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -107,7 +110,8 @@ export const createArticle = async ({collection_id,article_id,article_title,arti
     }
 }
 
-export const markAsReadArticle = async ({collection_id, article_id}) => {
+export const markAsReadArticle = async ( data ) => {
+    const { collection_id, article_id } = data;
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -121,13 +125,14 @@ export const markAsReadArticle = async ({collection_id, article_id}) => {
         const updatedData = JSON.stringify(updatedCollections)
         await AsyncStorage.setItem('@clippy', updatedData)
         ToastMessage('success', 'Marked', 'Clip Marked as read successfully.')
-        return getArticles(collection_id)
+        return getCollections()
     } catch (e) {
         ToastMessage('error', 'Failed', 'Clip not Marked as read.')
     }
 }
 
-export const editArticle = async ({collection_id,selected_collection,selected_article}) => {
+export const editArticle = async ( data ) => {
+    const { collection_id,selected_collection,selected_article } = data;
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -142,13 +147,14 @@ export const editArticle = async ({collection_id,selected_collection,selected_ar
         const updatedData = JSON.stringify(updatedCollection)
         await AsyncStorage.setItem('@clippy', updatedData)
         ToastMessage('success', 'Edited', 'Clip edited successfully.')
-        return getArticles(collection_id)
+        return getCollections()
     } catch (e) {
         ToastMessage('error', 'Failed', 'Clip not edited.')
     }
 }
 
-export const deleteArticle = async ({collection_id, article_id}) => {
+export const deleteArticle = async ( data ) => {
+    const { collection_id, article_id } = data;
     try {
         const results = await AsyncStorage.getItem('@clippy')
         const collections = results != null ? JSON.parse(results) : [];
@@ -159,7 +165,7 @@ export const deleteArticle = async ({collection_id, article_id}) => {
         const updatedData = JSON.stringify(updatedClips)
         await AsyncStorage.setItem('@clippy', updatedData)
         ToastMessage('success', 'Deleted', 'Clip Deleted successfully.')
-        return getArticles(collection_id)
+        return getCollections()
     } catch (e) {
         ToastMessage('error', 'Failed', 'Clip not deleted.')
     }

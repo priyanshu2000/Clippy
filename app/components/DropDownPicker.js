@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       borderRadius:0,
       borderWidth:0,
       margin:3.5,
-      backgroundColor:colors.White
+      backgroundColor:colors.white
     },
     textStyle:{
       fontFamily:'MediumItalic'

@@ -1,8 +1,10 @@
 import React from 'react'
-import colors from '../constants/colors';
+import colors from '../../constants/colors';
 import { Modal, View, StyleSheet, Text, KeyboardAvoidingView } from 'react-native';
+import ActionButton from '../buttons/ActionButton';
 
-const Dialogue = ({ isOpen, children, heading }) => {
+const ConfirmActionDialogue = ({ heading, isOpen, onCancel, onConfirm }) => {
+
     return (
         <Modal
             visible={isOpen}
@@ -15,7 +17,10 @@ const Dialogue = ({ isOpen, children, heading }) => {
                     <View style={styles.headingContainer} >
                         <Text style={styles.dialogueHeading}>{heading}</Text>
                     </View>
-                    {children}
+                    <View style={styles.actionButtonContainer} >
+                        <ActionButton title='Cancel' onPress={()=>onCancel()} />
+                        <ActionButton title='Confirm' color={colors.accent} titleColor={colors.white} onPress={()=>onConfirm()} />
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         </Modal>
@@ -24,29 +29,34 @@ const Dialogue = ({ isOpen, children, heading }) => {
 
 const styles = StyleSheet.create({
     modalContainer:{
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: colors.blackFade,
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
     },
     childrenContainer:{
-        backgroundColor:colors.White,
+        backgroundColor:colors.white,
         alignItems: 'center',
-        paddingBottom: 10,width:'92.5%'
+        paddingBottom: 10,
+        width:'92.5%',
     },
     headingContainer:{
-        backgroundColor:colors.Primary,
+        backgroundColor:colors.primary,
         width:'100%',
         alignItems:'center',
         justifyContent:'center',
         marginBottom:12.5
     },
     dialogueHeading:{
-        fontSize:18,
+        fontSize:15,
         margin:7.5,
         fontFamily:'MediumItalic',
-        color:colors.White
+        color:colors.white
+    },
+    actionButtonContainer:{
+        flexDirection:'row',
+        marginTop:3.5
     }
 })
 
-export default Dialogue;
+export default ConfirmActionDialogue;

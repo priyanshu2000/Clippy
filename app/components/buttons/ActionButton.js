@@ -4,8 +4,8 @@ import { Text, TouchableOpacity, StyleSheet, Keyboard } from 'react-native'
 
 const ActionButton = ({ title, onPress, color, titleColor }) => {
     return (
-        <TouchableOpacity style={[styles.buttonContainer,{backgroundColor: color || colors.White}]} onPress={()=>{onPress();Keyboard.dismiss()}} >
-            <Text style={[styles.title,{color:titleColor || colors.Accent}]} >{title}</Text>
+        <TouchableOpacity style={[styles.buttonContainer,{backgroundColor: color || colors.white}]} onPress={()=>{onPress();Keyboard.dismiss()}} >
+            <Text style={[styles.title,{color:titleColor || colors.accent}]} >{title}</Text>
         </TouchableOpacity>
     )
 }
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         paddingHorizontal:7.5,
         paddingVertical:3,
-        borderColor:colors.Accent,
+        borderColor:colors.accent,
         margin:7.5,
         borderWidth:1.5
     },
