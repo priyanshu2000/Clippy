@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
     "start": "react-native start",
+    "run:android": "react-native run-android",
+    "run:ios": "react-native run-ios",
+    "build:prod": "cd android && ./gradlew app:assembleRelease",
+    "build:dev": "cd android && ./gradlew app:assembleDebug",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -20,7 +22,7 @@
     "npm": "^7.16.0",
     "react": "17.0.1",
     "react-native": "0.64.1",
-    "react-native-dropdown-picker": "^5.1.19",
+    "react-native-dropdown-picker": "^5.1.21",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",

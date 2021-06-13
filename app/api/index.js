@@ -24,7 +24,7 @@ export const createCollection = async ( data ) => {
         return getCollections()
     } catch (e) {
         ToastMessage('error', 'Failed', 'Collection not created.')
-    }ToastMessage('error', 'Something went wrong', 'Please try again.')
+    }
 }
 
 export const editCollection = async ( data ) => {
