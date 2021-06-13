@@ -29,7 +29,7 @@ const ConfirmActionDialogue = ({ heading, isOpen, onCancel, onConfirm }) => {
 
 const styles = StyleSheet.create({
     modalContainer:{
-        backgroundColor: colors.blackFade,
+        backgroundColor: colors.blackLightFade,
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',

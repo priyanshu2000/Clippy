@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        backgroundColor: colors.blackFade
+        backgroundColor: colors.blackDarkFade
     },
     activityIndicatorWrapper: {
         backgroundColor: colors.white,

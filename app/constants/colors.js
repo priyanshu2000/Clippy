@@ -7,7 +7,8 @@ const colors = {
     black: '#000000',
     red: '#de1738',
     green: '#2e8b57',
-    blackFade:'rgba(0, 0, 0, 0.06)'
+    blackLightFade:'rgba(0, 0, 0, 0.1)',
+    blackDarkFade:'rgba(0, 0, 0, 0.3)'
 }
 
 export default colors;

@@ -24,7 +24,7 @@ const Dialogue = ({ isOpen, children, heading }) => {
 
 const styles = StyleSheet.create({
     modalContainer:{
-        backgroundColor: colors.blackFade,
+        backgroundColor: colors.blackLightFade,
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
