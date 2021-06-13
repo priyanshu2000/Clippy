@@ -14,7 +14,7 @@ import Loader from '../components/Loader';
 import ToastMessage from '../components/ToastMessage';
 import Dialogue from '../components/dialogues/Dialogue';
 import { urlInfoParser, UUID } from '../utils';
-import { CollectionContext } from '../utils/context';
+import { CollectionContext } from '../utils/CollectionContext';
 import { createCollection, getCollections, createArticle } from '../api';
 
 

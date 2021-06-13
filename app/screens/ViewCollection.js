@@ -14,7 +14,7 @@ import TextButton from '../components/buttons/TouchableTextButton';
 import ListEmptyComponent from '../components/ListEmptyComponent';
 import { deleteArticle, editCollection, deleteCollection, markAsReadArticle, getArticles, createArticle, editArticle, } from '../api';
 import { openInBrowser, urlInfoParser, UUID } from '../utils';
-import { CollectionContext } from '../utils/context';
+import { CollectionContext } from '../utils/CollectionContext';
 import ToastMessage from '../components/ToastMessage';
 import Loader from '../components/Loader';
 import ConfirmActionDialogue from '../components/dialogues/ConfirmActionDialogue';
