@@ -5,7 +5,7 @@ import { StyleSheet,TouchableOpacity } from 'react-native'
 
 const FAB = ({ onPress })=>(
     <TouchableOpacity style={styles.floatingButton} onPress={()=> onPress() } >
-        <Icon name="add"  size={24} color={colors.white} />
+        <Icon name="add" size={24} color={colors.white} />
     </TouchableOpacity>
 )
 

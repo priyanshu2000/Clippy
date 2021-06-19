@@ -1,14 +1,14 @@
 import React from 'react'
 import Home from '../screens/Home'
 import ViewCollection from '../screens/ViewCollection';
-import {  CollectionProvider } from '../utils/CollectionContext'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
 const Navigator =()=> {
   return (
-    <CollectionProvider>
+    <NavigationContainer>
       <Stack.Navigator
           headerMode={false}
           initialRouteName="home"
@@ -16,7 +16,7 @@ const Navigator =()=> {
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="view-collection" component={ViewCollection} />
       </Stack.Navigator>
-    </CollectionProvider>
+    </NavigationContainer>
   );
 }
 
