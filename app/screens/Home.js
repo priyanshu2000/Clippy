@@ -17,14 +17,16 @@ import { urlInfoParser, UUID } from '../utils';
 import { CollectionContext } from '../utils/CollectionContext';
 import { createCollection, getCollections, createArticle } from '../api';
 
-
 const Home = ({ navigation }) => {
 
     const [collections, setCollections] = useContext(CollectionContext)
 
-    useEffect( async ()=> {
-            const response = await getCollections()
-            setCollections(response)
+    useEffect(()=> {
+        const onGetCollections = async()=> {
+            const response = await getCollections();
+            setCollections(response);
+        }
+        onGetCollections()
     }, [])
 
     const [loading, setLoading] = useState(false)

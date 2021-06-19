@@ -1,14 +1,11 @@
+import {useEffect, useState} from 'react';
 import { Linking } from 'react-native';
 import { getLinkPreview } from 'link-preview-js';
 import ToastMessage from '../components/ToastMessage';
 
 export const urlInfoParser = (url) => {
-    try {
         const URL = url.includes('https://') ? url : `https://${url}`
         return getLinkPreview(URL)
-    } catch (e) {
-        ToastMessage('error', 'Invalid', 'Entered URL is invalid')
-    }
 }
 
 export const UUID = () => {
