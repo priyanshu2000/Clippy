@@ -21,12 +21,13 @@ const Home = ({navigation}) => {
   const [collections, setCollections] = useContext(CollectionContext);
 
   useEffect(() => {
-    const onGetCollections = async () => {
-      const response = await getCollections();
-      setCollections(response);
-    };
     onGetCollections();
   }, []);
+
+  const onGetCollections = async () => {
+    const response = await getCollections();
+    setCollections(response);
+  };
 
   const [loading, setLoading] = useState(false);
 
@@ -138,6 +139,35 @@ const Home = ({navigation}) => {
     </BottomSheet>
   );
 
+  const keyExtractor = (item) => item.collection_id;
+
+  const renderCollectionList = ({item}) => (
+    <View>
+      <TouchableOpacity
+        style={styles.collectionNameContainer}
+        onPress={() =>
+          navigation.navigate('ViewCollection', {collection: item})
+        }>
+        <Text style={styles.collectionName}>{item.collection_name}</Text>
+        <>
+          {item.data.length ? (
+            item.data.slice(0, 3).map((article) => (
+              <Text
+                key={article.article_id}
+                numberOfLines={1}
+                style={styles.articleNames}>
+                {article.article_title}
+              </Text>
+            ))
+          ) : (
+            <Text style={styles.articleNames}>No clips!</Text>
+          )}
+        </>
+      </TouchableOpacity>
+      <Divider />
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <Loader isShow={loading} />
@@ -154,34 +184,9 @@ const Home = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         style={styles.container}
         data={collections}
-        keyExtractor={(item) => item.collection_id}
+        keyExtractor={(item) => keyExtractor(item)}
         ListEmptyComponent={() => <ListEmptyComponent />}
-        renderItem={({item}) => (
-          <View>
-            <TouchableOpacity
-              style={styles.collectionNameContainer}
-              onPress={() =>
-                navigation.navigate('view-collection', {collection: item})
-              }>
-              <Text style={styles.collectionName}>{item.collection_name}</Text>
-              <>
-                {item.data.length ? (
-                  item.data.slice(0, 3).map((article) => (
-                    <Text
-                      key={article.article_id}
-                      numberOfLines={1}
-                      style={styles.articleNames}>
-                      {article.article_title}
-                    </Text>
-                  ))
-                ) : (
-                  <Text style={styles.articleNames}>No clips!</Text>
-                )}
-              </>
-            </TouchableOpacity>
-            <Divider />
-          </View>
-        )}
+        renderItem={(item) => renderCollectionList(item)}
       />
       {CollectionDialogue()}
       {ArticleDialogue()}

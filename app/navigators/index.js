@@ -9,17 +9,25 @@ import {
 
 const Stack = createStackNavigator();
 
+const screens = {
+  Home: 'Home',
+  ViewCollection: 'ViewCollection',
+};
+
 const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
         headerMode={false}
-        initialRouteName="home"
+        initialRouteName={screens.Home}
         screenOptions={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}>
-        <Stack.Screen name="home" component={Home} />
-        <Stack.Screen name="view-collection" component={ViewCollection} />
+        <Stack.Screen name={screens.Home} component={Home} />
+        <Stack.Screen
+          name={screens.ViewCollection}
+          component={ViewCollection}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -40,29 +40,38 @@ const ViewCollection = ({route, navigation}) => {
   const [collections, setCollections] = useContext(CollectionContext);
 
   useEffect(() => {
-    const onGetArticles = async () => {
-      const response = await getArticles(collection.collection_id);
-      setArticles(response);
-    };
     onGetArticles();
   }, [collections]);
+
+  const onGetArticles = async () => {
+    const response = await getArticles(collection.collection_id);
+    setArticles(response);
+  };
 
   const [loading, setLoading] = useState(false);
 
   const [articles, setArticles] = useState();
 
   const [articleUrl, setArticleUrl] = useState();
-  const [collectionName, setCollectionName] = useState(collection.collection_name);
+  const [collectionName, setCollectionName] = useState(
+    collection.collection_name,
+  );
 
   const [selectedArticle, setSelectedArticle] = useState();
-  const [selectedCollection, setSelectedCollection] = useState(collection.collection_id);
+  const [selectedCollection, setSelectedCollection] = useState(
+    collection.collection_id,
+  );
 
   const [isShowArticleDialogue, setShowArticleDialogue] = useState(false);
-  const [isShowEditArticleDialogue, setShowEditArticleDialogue] = useState(false);
-  const [isShowEditCollectionDialogue, setShowEditCollectionDialogue] = useState(false);
+  const [isShowEditArticleDialogue, setShowEditArticleDialogue] =
+    useState(false);
+  const [isShowEditCollectionDialogue, setShowEditCollectionDialogue] =
+    useState(false);
 
-  const [isShowDeleteArticleDialogue, setShowDeleteArticleDialogue] = useState(false);
-  const [isShowDeleteCollectionDialogue, setShowDeleteCollectionDialogue] = useState(false);
+  const [isShowDeleteArticleDialogue, setShowDeleteArticleDialogue] =
+    useState(false);
+  const [isShowDeleteCollectionDialogue, setShowDeleteCollectionDialogue] =
+    useState(false);
 
   const sheetRef = useRef();
 
@@ -233,6 +242,26 @@ const ViewCollection = ({route, navigation}) => {
     </BottomSheet>
   );
 
+  const keyExtractor = (item) => item.article_id;
+
+  const renderArticleList = ({item}) => (
+    <View>
+      <TouchableOpacity
+        onPress={() => openInBrowser(item.article_url)}
+        onLongPress={() => {
+          sheetRef.current.openSheet();
+          setSelectedArticle(item);
+        }}
+        style={styles.collectionNameContainer}>
+        <Image source={{uri: item.favicon_url}} style={styles.favicon} />
+        <Text numberOfLines={1} style={styles.collectionName}>
+          {item.article_title}
+        </Text>
+      </TouchableOpacity>
+      <Divider />
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <Loader isShow={loading} />
@@ -255,7 +284,7 @@ const ViewCollection = ({route, navigation}) => {
       <FAB onPress={() => setShowArticleDialogue(true)} />
       <SectionList
         sections={articles}
-        keyExtractor={(item) => item.article_id}
+        keyExtractor={(item) => keyExtractor(item)}
         renderSectionHeader={({section: {type}}) => (
           <View style={styles.sectionHeaderContainer}>
             {type === 'Read' && (
@@ -264,23 +293,7 @@ const ViewCollection = ({route, navigation}) => {
           </View>
         )}
         ListEmptyComponent={() => <ListEmptyComponent />}
-        renderItem={({item}) => (
-          <View>
-            <TouchableOpacity
-              onPress={() => openInBrowser(item.article_url)}
-              onLongPress={() => {
-                sheetRef.current.openSheet();
-                setSelectedArticle(item);
-              }}
-              style={styles.collectionNameContainer}>
-              <Image source={{uri: item.favicon_url}} style={styles.favicon} />
-              <Text numberOfLines={1} style={styles.collectionName}>
-                {item.article_title}
-              </Text>
-            </TouchableOpacity>
-            <Divider />
-          </View>
-        )}
+        renderItem={(item) => renderArticleList(item)}
       />
       <OptionBottomSheet />
       <ConfirmActionDialogue
