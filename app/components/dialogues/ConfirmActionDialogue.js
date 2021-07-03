@@ -1,13 +1,8 @@
 import React from 'react';
 import colors from '../../constants/colors';
-import {
-  Modal,
-  View,
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {Modal, View, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import ActionButton from '../buttons/ActionButton';
+import AppText from '../AppText';
 
 const ConfirmActionDialogue = ({heading, isOpen, onCancel, onConfirm}) => {
   return (
@@ -22,7 +17,7 @@ const ConfirmActionDialogue = ({heading, isOpen, onCancel, onConfirm}) => {
         style={styles.modalContainer}>
         <View style={styles.childrenContainer}>
           <View style={styles.headingContainer}>
-            <Text style={styles.dialogueHeading}>{heading}</Text>
+            <AppText style={styles.dialogueHeading}>{heading}</AppText>
           </View>
           <View style={styles.actionButtonContainer}>
             <ActionButton title="Cancel" onPress={() => onCancel()} />
@@ -62,7 +57,6 @@ const styles = StyleSheet.create({
   dialogueHeading: {
     fontSize: 15,
     margin: 7.5,
-    fontFamily: 'MediumItalic',
     color: colors.white,
   },
   actionButtonContainer: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import colors from '../../constants/colors';
-import {Text, TouchableOpacity, StyleSheet, Keyboard} from 'react-native';
+import {TouchableOpacity, StyleSheet, Keyboard} from 'react-native';
+import AppText from '../AppText';
 
 const ActionButton = ({title, onPress, color, titleColor}) => {
   return (
@@ -10,9 +11,9 @@ const ActionButton = ({title, onPress, color, titleColor}) => {
         onPress();
         Keyboard.dismiss();
       }}>
-      <Text style={[styles.title, {color: titleColor || colors.accent}]}>
+      <AppText style={[styles.title, {color: titleColor || colors.accent}]}>
         {title}
-      </Text>
+      </AppText>
     </TouchableOpacity>
   );
 };
@@ -31,7 +32,6 @@ const styles = StyleSheet.create({
   title: {
     margin: 3,
     fontSize: 15,
-    fontFamily: 'LightItalic',
   },
 });
 

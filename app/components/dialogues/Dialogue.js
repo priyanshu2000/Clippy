@@ -1,12 +1,7 @@
 import React from 'react';
 import colors from '../../constants/colors';
-import {
-  Modal,
-  View,
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {Modal, View, StyleSheet, KeyboardAvoidingView} from 'react-native';
+import AppText from '../AppText';
 
 const Dialogue = ({isOpen, children, heading}) => {
   return (
@@ -21,7 +16,7 @@ const Dialogue = ({isOpen, children, heading}) => {
         style={styles.modalContainer}>
         <View style={styles.childrenContainer}>
           <View style={styles.headingContainer}>
-            <Text style={styles.dialogueHeading}>{heading}</Text>
+            <AppText style={styles.dialogueHeading}>{heading}</AppText>
           </View>
           {children}
         </View>
@@ -53,7 +48,6 @@ const styles = StyleSheet.create({
   dialogueHeading: {
     fontSize: 18,
     margin: 7.5,
-    fontFamily: 'MediumItalic',
     color: colors.white,
   },
 });

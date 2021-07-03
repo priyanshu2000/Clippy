@@ -1,23 +1,24 @@
-import React, {useState, useEffect, useRef, useContext} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import Header from '../components/Header';
-import FAB from '../components/buttons/FloatingActionButton';
-import BottomSheet from '../components/BottomSheet';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import colors from '../constants/colors';
-import AppInput from '../components/AppInput';
-import ActionButton from '../components/buttons/ActionButton';
-import DDPicker from '../components/DropDownPicker';
+import Header from '../components/Header';
+import Loader from '../components/Loader';
+import AppText from '../components/AppText';
 import Divider from '../components/Divider';
+import AppInput from '../components/AppInput';
+import BottomSheet from '../components/BottomSheet';
+import DDPicker from '../components/DropDownPicker';
+import ToastMessage from '../components/ToastMessage';
+import FAB from '../components/buttons/FloatingActionButton';
+import ActionButton from '../components/buttons/ActionButton';
 import TextButton from '../components/buttons/TouchableTextButton';
 import ListEmptyComponent from '../components/ListEmptyComponent';
-import Loader from '../components/Loader';
-import ToastMessage from '../components/ToastMessage';
 import Dialogue from '../components/dialogues/Dialogue';
-import {urlInfoParser, UUID} from '../utils';
-import {CollectionContext} from '../utils/CollectionContext';
-import {createCollection, getCollections, createArticle} from '../api';
+import { urlInfoParser, UUID } from '../utils';
+import { CollectionContext } from '../utils/CollectionContext';
+import { createCollection, getCollections, createArticle } from '../api';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const [collections, setCollections] = useContext(CollectionContext);
 
   useEffect(() => {
@@ -141,26 +142,26 @@ const Home = ({navigation}) => {
 
   const keyExtractor = (item) => item.collection_id;
 
-  const renderCollectionList = ({item}) => (
+  const renderCollectionList = ({ item }) => (
     <View>
       <TouchableOpacity
         style={styles.collectionNameContainer}
         onPress={() =>
-          navigation.navigate('ViewCollection', {collection: item})
+          navigation.navigate('ViewCollection', { collection: item })
         }>
-        <Text style={styles.collectionName}>{item.collection_name}</Text>
+        <AppText style={styles.collectionName}>{item.collection_name}</AppText>
         <>
           {item.data.length ? (
             item.data.slice(0, 3).map((article) => (
-              <Text
+              <AppText
                 key={article.article_id}
                 numberOfLines={1}
                 style={styles.articleNames}>
                 {article.article_title}
-              </Text>
+              </AppText>
             ))
           ) : (
-            <Text style={styles.articleNames}>No clips!</Text>
+            <AppText style={styles.articleNames}>No clips!</AppText>
           )}
         </>
       </TouchableOpacity>
@@ -205,10 +206,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
   },
-  bottomSheetOptionText: {
-    fontSize: 17.5,
-    fontFamily: 'MediumItalic',
-  },
   collectionName: {
     fontFamily: 'Italic',
     fontSize: 17.5,
@@ -220,9 +217,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   articleNames: {
-    fontFamily: 'MediumItalic',
+    fontFamily: 'Italic',
     fontSize: 12.5,
-    opacity: 0.5,
+    color: colors.grey,
     marginVertical: 3.5,
   },
   actionButtonContainer: {

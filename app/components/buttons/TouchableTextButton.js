@@ -1,6 +1,7 @@
 import React from 'react';
 import colors from '../../constants/colors';
-import {TouchableOpacity, Text, StyleSheet, Keyboard} from 'react-native';
+import {TouchableOpacity, StyleSheet, Keyboard} from 'react-native';
+import AppText from '../AppText';
 
 const TextButton = ({title, color, onPress}) => {
   return (
@@ -10,10 +11,10 @@ const TextButton = ({title, color, onPress}) => {
         onPress();
         Keyboard.dismiss();
       }}>
-      <Text
+      <AppText
         style={[styles.bottomSheetOptionText, {color: color || colors.grey}]}>
         {title}
-      </Text>
+      </AppText>
     </TouchableOpacity>
   );
 };
@@ -27,7 +28,6 @@ const styles = StyleSheet.create({
   },
   bottomSheetOptionText: {
     fontSize: 16,
-    fontFamily: 'MediumItalic',
   },
 });
 

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import colors from '../constants/colors';
+import AppText from './AppText';
 
 const NetWorkStatus = () => {
   const [isOnline, setIsOnline] = useState(true);
@@ -13,7 +14,7 @@ const NetWorkStatus = () => {
   return (
     !isOnline && (
       <View style={styles.container}>
-        <Text style={styles.text}>No Internet connection!</Text>
+        <AppText style={styles.text}>No Internet connection!</AppText>
       </View>
     )
   );
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 9,
   },
-  text: {color: colors.white, fontSize: 12, fontFamily: 'MediumItalic'},
+  text: {color: colors.white, fontSize: 12},
 });
 
 export default NetWorkStatus;

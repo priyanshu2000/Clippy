@@ -1,22 +1,23 @@
 import Toast from 'react-native-toast-message';
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, StyleSheet} from 'react-native';
+import Icon from 'react-native-remix-icon';
 import colors from '../constants/colors';
+import AppText from './AppText';
 
 const ToastMessage = (toastType, toastTitle, toastDescription) => {
   Toast.show({
     type: toastType,
     position: 'bottom',
-    text1: toastTitle || type.toUpperCase(),
+    text1: toastTitle || toastType.toUpperCase(),
     text2: toastDescription || '',
     bottomOffset: 25,
   });
 };
 
 const Icons = {
-  error: 'close-circle',
-  success: 'checkmark-circle',
+  error: 'close-circle-fill',
+  success: 'checkbox-circle-fill',
 };
 
 const ToastBody = ({text1, text2, color, Icons}) => {
@@ -27,12 +28,12 @@ const ToastBody = ({text1, text2, color, Icons}) => {
         <View style={styles.container}>
           <Icon name={Icons} size={35} color={color} style={styles.icon} />
           <View>
-            <Text style={styles.textOne}>{text1}</Text>
-            <Text style={styles.textTwo}>{text2}</Text>
+            <AppText>{text1}</AppText>
+            <AppText style={styles.textTwo}>{text2}</AppText>
           </View>
         </View>
         <Icon
-          name="close"
+          name="close-fill"
           size={20}
           color={colors.Grey}
           onPress={() => Toast.hide()}
@@ -92,13 +93,8 @@ const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 7.5,
   },
-  textOne: {
-    opacity: 0.7,
-    fontFamily: 'MediumItalic',
-  },
   textTwo: {
-    opacity: 0.5,
-    fontFamily: 'MediumItalic',
+    color: colors.grey,
   },
   tintColor: {
     borderRadius: 10,

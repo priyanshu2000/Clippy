@@ -1,13 +1,12 @@
-import React, {useState, useEffect, useRef, useContext} from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   TouchableOpacity,
   SectionList,
 } from 'react-native';
-import {Icons} from '../assets/icons';
+import Icon from 'react-native-remix-icon';
 import FAB from '../components/buttons/FloatingActionButton';
 import Divider from '../components/Divider';
 import Header from '../components/Header';
@@ -28,14 +27,15 @@ import {
   createArticle,
   editArticle,
 } from '../api';
-import {openInBrowser, urlInfoParser, UUID} from '../utils';
-import {CollectionContext} from '../utils/CollectionContext';
+import { openInBrowser, urlInfoParser, UUID } from '../utils';
+import { CollectionContext } from '../utils/CollectionContext';
 import ToastMessage from '../components/ToastMessage';
 import Loader from '../components/Loader';
 import ConfirmActionDialogue from '../components/dialogues/ConfirmActionDialogue';
+import AppText from '../components/AppText';
 
-const ViewCollection = ({route, navigation}) => {
-  const {collection} = route.params;
+const ViewCollection = ({ route, navigation }) => {
+  const { collection } = route.params;
 
   const [collections, setCollections] = useContext(CollectionContext);
 
@@ -90,7 +90,7 @@ const ViewCollection = ({route, navigation}) => {
   };
 
   const onDeleteCollection = async () => {
-    const data = {collection_id: collection.collection_id};
+    const data = { collection_id: collection.collection_id };
     const response = await deleteCollection(data);
     setCollections(response);
     navigation.goBack();
@@ -244,7 +244,7 @@ const ViewCollection = ({route, navigation}) => {
 
   const keyExtractor = (item) => item.article_id;
 
-  const renderArticleList = ({item}) => (
+  const renderArticleList = ({ item }) => (
     <View>
       <TouchableOpacity
         onPress={() => openInBrowser(item.article_url)}
@@ -253,10 +253,10 @@ const ViewCollection = ({route, navigation}) => {
           setSelectedArticle(item);
         }}
         style={styles.collectionNameContainer}>
-        <Image source={{uri: item.favicon_url}} style={styles.favicon} />
-        <Text numberOfLines={1} style={styles.collectionName}>
+        <Image source={{ uri: item.favicon_url }} style={styles.favicon} />
+        <AppText numberOfLines={1} style={styles.collectionName}>
           {item.article_title}
-        </Text>
+        </AppText>
       </TouchableOpacity>
       <Divider />
     </View>
@@ -271,12 +271,14 @@ const ViewCollection = ({route, navigation}) => {
         right={
           <View style={styles.headerIconContainer}>
             <TouchableOpacity
+              style={styles.Icon}
               onPress={() => setShowEditCollectionDialogue(true)}>
-              <Image source={Icons.edit} style={styles.Icon} />
+              <Icon name="edit-line" size={22} color={colors.white} />
             </TouchableOpacity>
             <TouchableOpacity
+              style={styles.Icon}
               onPress={() => setShowDeleteCollectionDialogue(true)}>
-              <Image source={Icons.delete} style={styles.Icon} />
+              <Icon name="delete-bin-4-line" size={22} color={colors.white} />
             </TouchableOpacity>
           </View>
         }
@@ -285,10 +287,10 @@ const ViewCollection = ({route, navigation}) => {
       <SectionList
         sections={articles}
         keyExtractor={(item) => keyExtractor(item)}
-        renderSectionHeader={({section: {type}}) => (
+        renderSectionHeader={({ section: { type } }) => (
           <View style={styles.sectionHeaderContainer}>
             {type === 'Read' && (
-              <Text style={styles.sectionHeader}>{type}</Text>
+              <AppText style={styles.sectionHeader}>{type}</AppText>
             )}
           </View>
         )}
@@ -327,8 +329,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   Icon: {
-    height: 22.5,
-    width: 22.5,
     margin: 10,
   },
   sectionHeaderContainer: {
@@ -336,13 +336,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sectionHeader: {
-    fontFamily: 'Italic',
     fontSize: 17.5,
-    opacity: 0.5,
+    color: colors.grey,
     marginVertical: 20,
   },
   collectionName: {
-    fontFamily: 'MediumItalic',
     fontSize: 15,
     width: '90%',
     color: colors.grey,
@@ -355,7 +353,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   articleNames: {
-    fontFamily: 'Italic',
     fontSize: 12.5,
     marginTop: 5,
     color: colors.black,
@@ -368,7 +365,6 @@ const styles = StyleSheet.create({
   },
   bottomSheetOptionText: {
     fontSize: 17.5,
-    fontFamily: 'MediumItalic',
   },
   favicon: {
     height: 25,

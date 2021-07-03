@@ -1,12 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
+import colors from '../constants/colors';
+import AppText from './AppText';
 
 const ListEmptyComponent = () => {
   return (
     <View style={styles.listEmptyComponentContainer}>
-      <Text style={styles.listEmptyComponentText}>
+      <AppText style={styles.listEmptyComponentText}>
         No clips! Start by creating a collection using the + button
-      </Text>
+      </AppText>
     </View>
   );
 };
@@ -17,12 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    padding: '20%',
   },
   listEmptyComponentText: {
-    fontFamily: 'MediumItalic',
     fontSize: 16,
-    width: '55%',
-    opacity: 0.5,
+    color: colors.grey,
+    textAlign: 'center',
   },
 });
 

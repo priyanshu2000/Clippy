@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import colors from '../constants/colors';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import AppText,{textStyles} from './AppText';
 
 const DDPicker = ({value, setValue, items, heading, placeHolder}) => {
   const [isOpen, setOpen] = useState(false);
@@ -9,7 +10,7 @@ const DDPicker = ({value, setValue, items, heading, placeHolder}) => {
 
   return (
     <View>
-      <Text style={styles.pickerHeading}>{heading}</Text>
+      <AppText style={styles.pickerHeading}>{heading}</AppText>
       <DropDownPicker
         value={value}
         open={isOpen}
@@ -20,7 +21,7 @@ const DDPicker = ({value, setValue, items, heading, placeHolder}) => {
         itemKey={'collection_id'}
         closeAfterSelecting={true}
         placeholder={placeHolder}
-        textStyle={styles.textStyle}
+        textStyle={textStyles.text}
         setOpen={() => setOpen(!isOpen)}
         style={styles.pickerContainer}
         dropDownContainerStyle={styles.dropDown}
@@ -34,7 +35,6 @@ const styles = StyleSheet.create({
   pickerHeading: {
     alignSelf: 'flex-start',
     marginLeft: 10,
-    fontFamily: 'MediumItalic',
   },
   pickerContainer: {
     width: '95%',
@@ -53,9 +53,6 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     margin: 3.5,
     backgroundColor: colors.white,
-  },
-  textStyle: {
-    fontFamily: 'MediumItalic',
   },
 });
 

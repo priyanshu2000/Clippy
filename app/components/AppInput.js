@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import colors from '../constants/colors';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-remix-icon';
+import AppText, {textStyles} from './AppText';
 
 const AppInput = ({
   placeHolder,
@@ -15,7 +16,7 @@ const AppInput = ({
   const [showError, setShowError] = useState(false);
 
   const handleInput = (val) => {
-    if (val.length != 0) {
+    if (val.length !== 0) {
       setShowHint(true);
       setShowError(false);
     } else {
@@ -26,13 +27,13 @@ const AppInput = ({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.inputHeading}>{heading}</Text>
+      <AppText style={styles.inputHeading}>{heading}</AppText>
       <View style={styles.inputContainer}>
         <TextInput
           keyboardType={'default'}
           placeholderTextColor={colors.grey}
           placeholder={placeHolder}
-          style={styles.input}
+          style={[styles.input, textStyles.text]}
           onChangeText={onChange}
           defaultValue={value}
           autoFocus={autoFocus}
@@ -43,9 +44,9 @@ const AppInput = ({
         {showHint && (
           <>
             {showError ? (
-              <Icon name="alert-circle-outline" color="red" size={20} />
+              <Icon name="error-warning-line" color="red" size={20} />
             ) : (
-              <Icon name="checkmark-circle-outline" color="green" size={20} />
+              <Icon name="checkbox-circle-line" color="green" size={20} />
             )}
           </>
         )}
@@ -65,26 +66,20 @@ const styles = StyleSheet.create({
   inputHeading: {
     alignSelf: 'flex-start',
     marginLeft: 10,
-    fontFamily: 'MediumItalic',
   },
   inputContainer: {
-    fontSize: 15,
     paddingHorizontal: 10,
     width: '95%',
     flexDirection: 'row',
     backgroundColor: colors.lightGrey,
     margin: 3.5,
-    fontFamily: 'MediumItalic',
-    color: colors.black,
-    opacity: 0.7,
     alignItems: 'center',
     height: 40,
+    opacity: 0.7
   },
   input: {
     width: '95%',
-    fontFamily: 'MediumItalic',
     color: colors.black,
-    opacity: 0.7,
   },
 });
 
