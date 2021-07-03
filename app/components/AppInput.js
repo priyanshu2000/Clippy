@@ -1,76 +1,86 @@
-import React,{ useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, TextInput} from 'react-native';
 import colors from '../constants/colors';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-remix-icon';
+import AppText, {textStyles} from './AppText';
 
-const AppInput = ({ placeHolder, onChange, value, autoFocus, heading, isEditable }) => {
+const AppInput = ({
+  placeHolder,
+  onChange,
+  value,
+  autoFocus,
+  heading,
+  isEditable,
+}) => {
+  const [showHint, setShowHint] = useState(value ? true : false);
+  const [showError, setShowError] = useState(false);
 
-    const [showHint, setShowHint] = useState( value ? true : false)
-    const [showError, setShowError] = useState(false)
-
-    const handleInput = ( val )=> {
-        if(val.length != 0){
-            setShowHint(true);setShowError(false)
-        }
-        else {
-            setShowHint(true);setShowError(true)
-        }
+  const handleInput = (val) => {
+    if (val.length !== 0) {
+      setShowHint(true);
+      setShowError(false);
+    } else {
+      setShowHint(true);
+      setShowError(true);
     }
+  };
 
-    return (
-        <View style={styles.container} >
-            <Text style={styles.inputHeading} >{heading}</Text>
-        <View style={styles.inputContainer} >
-            <TextInput
-                keyboardType={'default'}
-                placeholderTextColor={colors.grey}
-                placeholder={placeHolder}
-                style={styles.input}
-                onChangeText={onChange}
-                defaultValue={value}
-                autoFocus={autoFocus}
-                autoCapitalize='words'
-                editable={isEditable}
-                onChange={(e)=>handleInput(e.nativeEvent.text)}
-                />
-            {showHint && <>{ showError ?  <Icon name='alert-circle-outline' color='red' size={20} /> : <Icon name='checkmark-circle-outline' color='green' size={20} />}</>}
-        </View>
-        </View>
-    )
-}
+  return (
+    <View style={styles.container}>
+      <AppText style={styles.inputHeading}>{heading}</AppText>
+      <View style={styles.inputContainer}>
+        <TextInput
+          keyboardType={'default'}
+          placeholderTextColor={colors.grey}
+          placeholder={placeHolder}
+          style={[styles.input, textStyles.text]}
+          onChangeText={onChange}
+          defaultValue={value}
+          autoFocus={autoFocus}
+          autoCapitalize="words"
+          editable={isEditable}
+          onChange={(e) => handleInput(e.nativeEvent.text)}
+        />
+        {showHint && (
+          <>
+            {showError ? (
+              <Icon name="error-warning-line" color="red" size={20} />
+            ) : (
+              <Icon name="checkbox-circle-line" color="green" size={20} />
+            )}
+          </>
+        )}
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container:{
-        width:'100%',
-        alignItems:'center',
-        justifyContent:'space-between',
-        marginVertical:12.5,
-        zIndex:1000
-    },
-    inputHeading:{
-        alignSelf:"flex-start",
-        marginLeft:10,
-        fontFamily:'MediumItalic'
-    },
-    inputContainer: {
-        fontSize: 15,
-        paddingHorizontal:10 ,
-        width:'95%',
-        flexDirection:'row',
-        backgroundColor:colors.lightGrey,
-        margin:3.5,
-        fontFamily:'MediumItalic',
-        color:colors.black,
-        opacity:0.7,
-        alignItems:"center",
-        height:40
-    },
-    input:{
-        width:'95%',
-        fontFamily:'MediumItalic',
-        color:colors.black,
-        opacity:0.7
-    }
-})
+  container: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 12.5,
+    zIndex: 1000,
+  },
+  inputHeading: {
+    alignSelf: 'flex-start',
+    marginLeft: 10,
+  },
+  inputContainer: {
+    paddingHorizontal: 10,
+    width: '95%',
+    flexDirection: 'row',
+    backgroundColor: colors.lightGrey,
+    margin: 3.5,
+    alignItems: 'center',
+    height: 40,
+    opacity: 0.7
+  },
+  input: {
+    width: '95%',
+    color: colors.black,
+  },
+});
 
 export default AppInput;
