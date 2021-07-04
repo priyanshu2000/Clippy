@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {
   View,
   Image,
@@ -27,15 +27,15 @@ import {
   createArticle,
   editArticle,
 } from '../api';
-import { openInBrowser, urlInfoParser, UUID } from '../utils';
-import { CollectionContext } from '../utils/CollectionContext';
+import {openInBrowser, urlInfoParser, UUID} from '../utils';
+import {CollectionContext} from '../utils/CollectionContext';
 import ToastMessage from '../components/ToastMessage';
 import Loader from '../components/Loader';
 import ConfirmActionDialogue from '../components/dialogues/ConfirmActionDialogue';
 import AppText from '../components/AppText';
 
-const ViewCollection = ({ route, navigation }) => {
-  const { collection } = route.params;
+const ViewCollection = ({route, navigation}) => {
+  const {collection} = route.params;
 
   const [collections, setCollections] = useContext(CollectionContext);
 
@@ -90,7 +90,7 @@ const ViewCollection = ({ route, navigation }) => {
   };
 
   const onDeleteCollection = async () => {
-    const data = { collection_id: collection.collection_id };
+    const data = {collection_id: collection.collection_id};
     const response = await deleteCollection(data);
     setCollections(response);
     navigation.goBack();
@@ -244,7 +244,7 @@ const ViewCollection = ({ route, navigation }) => {
 
   const keyExtractor = (item) => item.article_id;
 
-  const renderArticleList = ({ item }) => (
+  const renderArticleList = ({item}) => (
     <View>
       <TouchableOpacity
         onPress={() => openInBrowser(item.article_url)}
@@ -253,7 +253,7 @@ const ViewCollection = ({ route, navigation }) => {
           setSelectedArticle(item);
         }}
         style={styles.collectionNameContainer}>
-        <Image source={{ uri: item.favicon_url }} style={styles.favicon} />
+        <Image source={{uri: item.favicon_url}} style={styles.favicon} />
         <AppText numberOfLines={1} style={styles.collectionName}>
           {item.article_title}
         </AppText>
@@ -287,7 +287,7 @@ const ViewCollection = ({ route, navigation }) => {
       <SectionList
         sections={articles}
         keyExtractor={(item) => keyExtractor(item)}
-        renderSectionHeader={({ section: { type } }) => (
+        renderSectionHeader={({section: {type}}) => (
           <View style={styles.sectionHeaderContainer}>
             {type === 'Read' && (
               <AppText style={styles.sectionHeader}>{type}</AppText>
